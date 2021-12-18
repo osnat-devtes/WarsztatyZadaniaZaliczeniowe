@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class BasePage {
     protected WebDriver driver;
@@ -23,11 +25,7 @@ public class BasePage {
         drpElement.selectByVisibleText(enteredDropdownText);
     }
     public String getLandingUrl(){
-        try{
-            Thread.sleep(2000);
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         return driver.getCurrentUrl();
     }
 }

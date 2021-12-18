@@ -15,10 +15,14 @@ import java.util.concurrent.TimeUnit;
 public class CreateNewAddressSteps {
     public WebDriver driver;
 
+    //If there is no addresses created the test should be run two times
+    //the first time - for creating the first address, and it will not pass
+    //and the second time - for the second address and then the test should pass
     @Given("an open browser with my store website")
     public void anOpenBrowser(){
         System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get("https://mystore-testlab.coderslab.pl");
     }
@@ -29,7 +33,7 @@ public class CreateNewAddressSteps {
         userLogIn.logIn(email,password);
     }
 
-    @Then("checking if an user has already created at least one address and clicking address button")
+    @Then("checking if the user has already created at least one address and clicking address button")
     public void checkingCreatedAddress() {
         GoToAddressPage goToAddressPage = new GoToAddressPage(driver);
         goToAddressPage.clickCorrectButton();
@@ -72,6 +76,6 @@ public class CreateNewAddressSteps {
 
     @And("close the browser")
     public void closeTheBrowser() {
-        driver.quit();
+        //driver.quit();
     }
 }
